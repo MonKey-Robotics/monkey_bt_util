@@ -61,6 +61,7 @@ endfunction()
 
 # Create libraries with the function
 # Action plugins
+create_bt_plugin(log_info src/plugins/action/log_info.cpp)
 create_bt_plugin(print_message src/plugins/action/print_message.cpp)
 
 # Control plugins
@@ -84,7 +85,7 @@ install(TARGETS ${LIBRARY_NAME}
     RUNTIME DESTINATION bin
 )
 
-install(DIRECTORY tree
+install(DIRECTORY config launch tree
     DESTINATION share/${PROJECT_NAME}
 )
 

@@ -1,0 +1,11 @@
+demo_bt_server:
+  ros__parameters:
+    wait_for_server_timeout: 1000 # timeout (milliseconds) used when detecting the server
+    server_timeout: 5000 # timeout (milliseconds) when sending a request
+    
+    # ROS2 packages for BT plugins. Make sure all the plugins are placed on 
+    # "/bt_plugins" of the package share directory
+    plugin_packages:
+      - monkey_bt_util
+    
+    demo_tree_xml: /root/rover_ws/install/monkey_bt_util/share/monkey_bt_util/tree/demo_tree.xml

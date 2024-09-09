@@ -3,15 +3,15 @@
   <BehaviorTree ID="main">
     <RecoveryNode number_of_retries="5">
       <ForceFailure>
-        <PrintMessage message="This will always fail!"/>
+        <LogInfo message="This will always fail!"/>
       </ForceFailure>
-      <PrintMessage message="Running recovery action"/>
+      <LogInfo message="Running recovery action"/>
     </RecoveryNode>
   </BehaviorTree>
 
   <!-- Description of Node Models (used by Groot) -->
   <TreeNodesModel>
-    <Action ID="PrintMessage"
+    <Action ID="LogInfo"
             editable="true">
       <input_port name="message"/>
     </Action>

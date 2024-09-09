@@ -3,6 +3,9 @@
     <include path="demo_tree.xml"/>
     <!-- Description of Node Models (used by Groot) -->
     <TreeNodesModel>
+        <Action ID="LogInfo" editable="true">
+            <input_port name="message"/>
+        </Action>
         <Action ID="PrintMessage" editable="true">
             <input_port name="message"/>
         </Action>

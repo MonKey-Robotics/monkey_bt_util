@@ -1,21 +1,19 @@
-#ifndef MONKEY_BT_UTIL__PRINT_MESSAGE_HPP_
-#define MONKEY_BT_UTIL__PRINT_MESSAGE_HPP_
+#ifndef MONKEY_BT_UTIL__LOG_INFO_HPP_
+#define MONKEY_BT_UTIL__LOG_INFO_HPP_
 
-#include <string>
-#include <iostream>
-
+#include "rclcpp/rclcpp.hpp"
 #include "behaviortree_cpp/action_node.h"
 
 namespace monkey_bt_util
 {
 
 // SyncActionNode (synchronous action) with an input port.
-class PrintMessage : public BT::SyncActionNode
+class LogInfo : public BT::SyncActionNode
 {
 
 public:
   // Constructor
-  PrintMessage(const std::string& name, const BT::NodeConfig& config);
+  LogInfo(const std::string& name, const BT::NodeConfig& config);
 
   // Static method to define the ports
   static BT::PortsList providedPorts();
@@ -27,4 +25,4 @@ public:
 
 } // namespace monkey_bt_util
 
-#endif // MONKEY_BT_UTIL__PRINT_MESSAGE_HPP_
+#endif // MONKEY_BT_UTIL__LOG_INFO_HPP_
