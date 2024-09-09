@@ -11,7 +11,7 @@ ros2 run monkey_bt_util demo_bt_server
 
 On another terminal, execute the tree via ros2 service:
 ```bash
-ros2 service call xxxxx
+ros2 service call /execute_tree std_srvs/srv/Empty
 ```
 
 ## Authors

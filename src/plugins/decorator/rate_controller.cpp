@@ -89,6 +89,12 @@ BT::NodeStatus RateController::tick()
 
 }  // namespace monkey_bt_util
 
+#include "behaviortree_ros2/plugins.hpp"
+BT_REGISTER_ROS_NODES(factory, /* params */)
+{
+    factory.registerNodeType<monkey_bt_util::RateController>("RateController");
+}
+
 #include "behaviortree_cpp/bt_factory.h"
 BT_REGISTER_NODES(factory)
 {

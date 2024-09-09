@@ -3,6 +3,9 @@
     <include path="demo_tree.xml"/>
     <!-- Description of Node Models (used by Groot) -->
     <TreeNodesModel>
+        <Action ID="PrintMessage" editable="true">
+            <input_port name="message"/>
+        </Action>
         <Decorator ID="RateController" editable="true">
             <input_port name="hz" default="1"/>
         </Decorator>

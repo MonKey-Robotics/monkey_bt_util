@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root BTCPP_format="4"
-      main_tree_to_execute="main">
+<root BTCPP_format="4">
   <BehaviorTree ID="main">
-    <AlwaysSuccess/>
+    <RecoveryNode number_of_retries="5">
+      <ForceFailure>
+        <PrintMessage message="This will always fail!"/>
+      </ForceFailure>
+      <PrintMessage message="Running recovery action"/>
+    </RecoveryNode>
   </BehaviorTree>
 
   <!-- Description of Node Models (used by Groot) -->
-  <TreeNodesModel/>
+  <TreeNodesModel>
+    <Action ID="PrintMessage"
+            editable="true">
+      <input_port name="message"/>
+    </Action>
+    <Control ID="RecoveryNode"
+             editable="true">
+      <input_port name="number_of_retries"
+                  default="1"/>
+    </Control>
+  </TreeNodesModel>
 
 </root>
