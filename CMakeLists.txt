@@ -68,6 +68,7 @@ create_bt_plugin(print_message src/plugins/action/print_message.cpp)
 create_bt_plugin(recovery_node src/plugins/control/recovery_node.cpp)
 
 # Decorator plugins
+create_bt_plugin(always_success_except_failure src/plugins/decorator/always_success_except_failure.cpp)
 create_bt_plugin(rate_controller src/plugins/decorator/rate_controller.cpp)
 
 ## --------Install---------
