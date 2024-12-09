@@ -43,6 +43,14 @@ target_include_directories(demo_bt_server PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>)
 
+add_executable(zerrhand_bt_server src/hand_bt_server.cpp)
+ament_target_dependencies(zerrhand_bt_server ${THIS_PACKAGE_DEPS})
+target_link_libraries(zerrhand_bt_server ${LIBRARY_NAME})
+target_include_directories(zerrhand_bt_server PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>)
+    ament_target_dependencies(zerrhand_bt_server ${THIS_PACKAGE_DEPS})
+
 # --------BT Plugins--------
 # Function to create and configure a bt plugins
 function(create_bt_plugin plugin_name src_file)
@@ -78,6 +86,7 @@ install(DIRECTORY include/
 
 install(TARGETS
     demo_bt_server
+    zerrhand_bt_server
     DESTINATION lib/${PROJECT_NAME})
 
 install(TARGETS ${LIBRARY_NAME}

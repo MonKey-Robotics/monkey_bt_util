@@ -13,6 +13,7 @@ def generate_launch_description():
 
     # Config file
     demo_config = os.path.join(pkg_dir, 'config', 'demo_config.yaml')
+    hand_config = os.path.join(pkg_dir, 'config', 'hand_config.yaml')
 
     # Launch commands
 
@@ -23,7 +24,15 @@ def generate_launch_description():
         parameters = [demo_config],
     )
 
+    hand_bt_server_node = Node(
+        package = 'monkey_bt_util',
+        executable = 'hand_bt_server',
+        name = 'hand_bt_server',
+        parameters = [hand_config],
+    )
+
     return LaunchDescription([
         # Launch commands
         demo_bt_server_node,
+        hand_bt_server_node,
     ])

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4" project_name="Project">
+    <include path="../../../../../Groot2/demo_tree.xml"/>
+    <include path="../../../../../Groot2/hand_aim_cut_bt.xml"/>
+    <include path="../../../../../Groot2/hand_tree.xml"/>
+    <!-- Description of Node Models (used by Groot) -->
+    <TreeNodesModel>
+        <Action ID="AimCut" editable="true">
+            <input_port name="action_name"/>
+            <input_port name="task"/>
+            <input_port name="pose"/>
+        </Action>
+        <Action ID="ApproachFrond" editable="true"/>
+        <Action ID="CloseShear" editable="true"/>
+        <Action ID="FindFrond" editable="true"/>
+        <Condition ID="FrondFound" editable="true"/>
+        <Condition ID="FrondReached" editable="true"/>
+        <Action ID="HoldUp" editable="true"/>
+        <Action ID="LogInfo" editable="true">
+            <input_port name="message"/>
+        </Action>
+        <Condition ID="NearFrond" editable="true"/>
+        <Action ID="OpenShear" editable="true"/>
+        <Control ID="RecoveryNode" editable="true">
+            <input_port name="number_of_retries" default="1"/>
+        </Control>
+        <Condition ID="ReturnHoldup" editable="true"/>
+    </TreeNodesModel>
+</root>

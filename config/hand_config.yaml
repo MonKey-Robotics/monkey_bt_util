@@ -1,4 +1,4 @@
-demo_bt_server:
+hand_bt_server:
   ros__parameters:
     wait_for_server_timeout: 1000 # timeout (milliseconds) used when detecting the server
     server_timeout: 5000 # timeout (milliseconds) when sending a request
@@ -8,4 +8,4 @@ demo_bt_server:
     plugin_packages:
       - monkey_bt_util
     
-    demo_tree_xml: /root/hand_ws/install/monkey_bt_util/share/monkey_bt_util/tree/demo_tree.xml
+    demo_tree_xml: /root/hand_ws/install/monkey_bt_util/share/monkey_bt_util/tree/hand_tree.xml

@@ -29,7 +29,7 @@ void DemoBtServer::setup_behavior_tree(BT::BehaviorTreeFactory& factory)
 {
     // Create the behavior tree using the XML description
     this->declare_parameter("demo_tree_xml", 
-        "/root/rover_ws/install/monkey_bt_util/share/monkey_bt_util/tree/demo_tree.xml");
+        "/root/hand_ws/install/monkey_bt_util/share/monkey_bt_util/tree/demo_tree.xml");
     std::string demo_tree_xml = this->get_parameter("demo_tree_xml").as_string();
     demo_tree_ = factory.createTreeFromFile(demo_tree_xml);
 
