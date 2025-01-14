@@ -59,17 +59,18 @@ function(create_bt_plugin plugin_name src_file)
     )
 endfunction()
 
-# Create libraries with the function
-# Action plugins
-create_bt_plugin(log_info src/plugins/action/log_info.cpp)
-create_bt_plugin(print_message src/plugins/action/print_message.cpp)
+# Discover all plugin sources in action, control, and decorator folders
+file(GLOB_RECURSE PLUGIN_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} 
+    "src/plugins/action/*.cpp" 
+    "src/plugins/control/*.cpp" 
+    "src/plugins/decorator/*.cpp"
+)
 
-# Control plugins
-create_bt_plugin(recovery_node src/plugins/control/recovery_node.cpp)
-
-# Decorator plugins
-create_bt_plugin(always_success_except_failure src/plugins/decorator/always_success_except_failure.cpp)
-create_bt_plugin(rate_controller src/plugins/decorator/rate_controller.cpp)
+# Create plugins using the discovered source files
+foreach(src_file ${PLUGIN_SOURCES})
+    get_filename_component(plugin_name ${src_file} NAME_WE)
+    create_bt_plugin(${plugin_name} ${src_file})
+endforeach()
 
 ## --------Install---------
 install(DIRECTORY include/
