@@ -18,7 +18,7 @@ ros2 service call /execute_tree std_srvs/srv/Empty
 
 This library supports the following lifecycle transition IDs:
 
-*** NOTE: THE BT NODE "LifecycleService" ONLY SUPPORTS LIFECYCLE TRANSITION STATE CHANGES, IT DOES NOT READ THE CURRENT STATE OF THE NODE.
+* **NOTE: THE BT NODE "LifecycleService" ONLY SUPPORTS LIFECYCLE TRANSITION STATE CHANGES, IT DOES NOT READ THE CURRENT STATE OF THE NODE.**
 
 | Transition ID | Description                          |
 | ------------- | ------------------------------------ |
@@ -55,9 +55,9 @@ This library supports the following lifecycle transition IDs:
 
 Each transition ID corresponds to a unique state in the lifecycle of a node.
 
-# Example usage in BT:
+## Example usage in BT:
 Make sure to format the service_name like this: /<node_name>/change_state
-*** The "/change_state" must be included in the service_name
+* **The "/change_state" must be included in the service_name**
 
 ```bash
     <LifecycleService service_name="/lc_talker/change_state"
