@@ -8,4 +8,4 @@ demo_bt_server:
     plugin_packages:
       - monkey_bt_util
     
-    demo_tree_xml: /root/rover_ws/install/monkey_bt_util/share/monkey_bt_util/tree/demo_tree.xml
+    demo_tree_xml: /root/dep_ws/install/monkey_bt_util/share/monkey_bt_util/tree/demo_tree.xml

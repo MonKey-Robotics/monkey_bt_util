@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4" project_name="Project">
+    <include path="lifecycle_test.xml"/>
+    <!-- Description of Node Models (used by Groot) -->
+    <TreeNodesModel>
+        <Action ID="LifecycleService" editable="true">
+            <input_port name="service_name"/>
+            <input_port name="transition_id"/>
+        </Action>
+    </TreeNodesModel>
+</root>

@@ -21,6 +21,8 @@ def generate_launch_description():
         executable = 'demo_bt_server',
         name = 'demo_bt_server',
         parameters = [demo_config],
+        respawn = True,
+        respawn_delay = 5.0,
     )
 
     return LaunchDescription([

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4">
+  <BehaviorTree ID="change_state">
+    <Sequence>
+      <LifecycleService service_name="/lc_talker/change_state"
+                        transition_id="1"/>
+      <Delay delay_msec="3000">
+        <LifecycleService service_name="/lc_talker/change_state"
+                          transition_id="3"/>
+      </Delay>
+      <Delay delay_msec="3000">
+        <LifecycleService service_name="/lc_talker/change_state"
+                          transition_id="4"/>
+      </Delay>
+      <Delay delay_msec="3000">
+        <LifecycleService service_name="/lc_talker/change_state"
+                          transition_id="2"/>
+      </Delay>
+    </Sequence>
+  </BehaviorTree>
+
+  <!-- Description of Node Models (used by Groot) -->
+  <TreeNodesModel>
+    <Action ID="LifecycleService"
+            editable="true">
+      <input_port name="service_name"/>
+      <input_port name="transition_id"/>
+    </Action>
+  </TreeNodesModel>
+
+</root>

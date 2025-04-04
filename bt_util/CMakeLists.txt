@@ -17,6 +17,8 @@ set(THIS_PACKAGE_DEPS
     std_srvs
     behaviortree_cpp
     behaviortree_ros2
+    rclcpp_lifecycle
+    lifecycle_msgs
 )
 
 # Find each package in the list
