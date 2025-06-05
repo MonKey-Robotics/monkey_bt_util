@@ -29,8 +29,8 @@ BT::NodeStatus AddFloat::tick() {
 
   // Ensure at least 2 valid inputs
   if (valid_floats.size() < 2) {
-    throw BT::RuntimeError(
-        "Missing required inputs [At least 2 inputs required]");
+    std::cout << 
+        "Missing required inputs [At least 2 inputs required]" << std::endl;
     return BT::NodeStatus::FAILURE;
   }
 
