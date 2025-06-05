@@ -10,7 +10,7 @@ FloatToString::FloatToString(const std::string& name,
 // Define the static method to provide ports
 BT::PortsList FloatToString::providedPorts() {
   // This action has a single input port called "message"
-  return {BT::InputPort<double>("float_data"),
+  return {BT::InputPort<float>("float_data"),
           BT::OutputPort<std::string>("str_data")};
 }
 
