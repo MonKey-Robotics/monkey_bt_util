@@ -16,22 +16,19 @@ BT::PortsList FloatToString::providedPorts() {
 
 // Override the tick() method
 BT::NodeStatus FloatToString::tick() {
-  // Retrieve the inputs using BT::Expected<T>
-  float data_ = getInput<float>("float_data").value();
-
-  // Ensure at least 2 valid inputs
-  if (!data_) {
-    std::cout << "Missing required input [float_data]"
-              << std::endl;
+  // Try to retrieve the input
+  auto res = getInput<float>("float_data");
+  if (!res) {
+    std::cerr << "Missing or invalid input [float_data]: " << res.error() << std::endl;
     return BT::NodeStatus::FAILURE;
   }
 
-  // Create message
-  std::string data_str_ = std::to_string(data_);
-  std::cout << data_str_ << std::endl;
+  float data = res.value();
+  std::string data_str = std::to_string(data);
 
-  // Set outputs
-  setOutput("data_str", data_str_);
+  std::cout << "Converted float to string: " << data_str << std::endl;
+
+  setOutput("str_data", data_str);
   return BT::NodeStatus::SUCCESS;
 }
 
