@@ -3,7 +3,7 @@
     <include path="lifecycle_test.xml"/>
     <!-- Description of Node Models (used by Groot) -->
     <TreeNodesModel>
-        <Action ID="LifecycleService" editable="true">
+        <Action ID="LifecycleChangeState" editable="true">
             <input_port name="service_name"/>
             <input_port name="transition_id"/>
         </Action>
