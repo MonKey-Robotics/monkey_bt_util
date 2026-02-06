@@ -61,11 +61,12 @@ function(create_bt_plugin plugin_name src_file)
     )
 endfunction()
 
-# Discover all plugin sources in action, control, and decorator folders
-file(GLOB_RECURSE PLUGIN_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} 
-    "src/plugins/action/*.cpp" 
-    "src/plugins/control/*.cpp" 
+# Discover all plugin sources in action, control, decorator, and condition folders
+file(GLOB_RECURSE PLUGIN_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+    "src/plugins/action/*.cpp"
+    "src/plugins/control/*.cpp"
     "src/plugins/decorator/*.cpp"
+    "src/plugins/condition/*.cpp"
 )
 
 # Create plugins using the discovered source files
