@@ -9,7 +9,8 @@
 
 using namespace std::chrono_literals;
 using ChangeState = lifecycle_msgs::srv::ChangeState;
-// using Transition = lifecycle_msgs::msg::Transition;
+
+namespace monkey_bt_util {
 
 class LifecycleService : public BT::RosServiceNode<ChangeState> {
  public:
@@ -39,7 +40,8 @@ class LifecycleService : public BT::RosServiceNode<ChangeState> {
    * @brief Handle service-related errors
    */
   BT::NodeStatus onFailure(BT::ServiceNodeErrorCode error) override;
-
 };
+
+}  // namespace monkey_bt_util
 
 #endif  // MONKEY_BT_UTIL__LIFECYCLE_SERVICE_HPP
