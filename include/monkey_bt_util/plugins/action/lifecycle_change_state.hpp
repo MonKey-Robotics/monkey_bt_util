@@ -12,12 +12,12 @@ using ChangeState = lifecycle_msgs::srv::ChangeState;
 
 namespace monkey_bt_util {
 
-class LifecycleService : public BT::RosServiceNode<ChangeState> {
+class LifecycleChangeState : public BT::RosServiceNode<ChangeState> {
  public:
   /**
-   * @brief Constructor for the LifecycleService node
+   * @brief Constructor for the LifecycleChangeState node
    */
-  LifecycleService(const std::string& name, const BT::NodeConfig& conf,
+  LifecycleChangeState(const std::string& name, const BT::NodeConfig& conf,
                    const BT::RosNodeParams& params);
 
   /**

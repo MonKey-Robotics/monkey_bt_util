@@ -1,20 +1,20 @@
-#include "monkey_bt_util/plugins/action/lifecycle_service.hpp"
+#include "monkey_bt_util/plugins/action/lifecycle_change_state.hpp"
 #include "behaviortree_ros2/plugins.hpp"
 
 namespace monkey_bt_util {
 
-LifecycleService::LifecycleService(const std::string& name,
+LifecycleChangeState::LifecycleChangeState(const std::string& name,
                                    const BT::NodeConfig& conf,
                                    const BT::RosNodeParams& params)
     : RosServiceNode<ChangeState>(name, conf, params) {}
 
-BT::PortsList LifecycleService::providedPorts() {
+BT::PortsList LifecycleChangeState::providedPorts() {
   return providedBasicPorts(
     {BT::InputPort<std::string>("service_name"),
      BT::InputPort<int>("transition_id")});
 }
 
-bool LifecycleService::setRequest(Request::SharedPtr& request) {
+bool LifecycleChangeState::setRequest(Request::SharedPtr& request) {
   // Get transition_id from input port using correct getInput pattern
   auto transition_id_result = getInput<int>("transition_id");
 
@@ -47,7 +47,7 @@ bool LifecycleService::setRequest(Request::SharedPtr& request) {
   return true;
 }
 
-BT::NodeStatus LifecycleService::onResponseReceived(
+BT::NodeStatus LifecycleChangeState::onResponseReceived(
     const Response::SharedPtr& response) {
   if (response->success) {
     RCLCPP_INFO(node_.lock()->get_logger(),
@@ -63,7 +63,7 @@ BT::NodeStatus LifecycleService::onResponseReceived(
   }
 }
 
-BT::NodeStatus LifecycleService::onFailure(BT::ServiceNodeErrorCode error) {
+BT::NodeStatus LifecycleChangeState::onFailure(BT::ServiceNodeErrorCode error) {
   RCLCPP_ERROR(node_.lock()->get_logger(), "%s(%s) -> Failure, Error code: %d",
                this->name().c_str(), this->service_name_.c_str(), error);
   return BT::NodeStatus::FAILURE;
@@ -72,5 +72,5 @@ BT::NodeStatus LifecycleService::onFailure(BT::ServiceNodeErrorCode error) {
 }  // namespace monkey_bt_util
 
 BT_REGISTER_ROS_NODES(factory, params) {
-  factory.registerNodeType<monkey_bt_util::LifecycleService>("LifecycleService", params);
+  factory.registerNodeType<monkey_bt_util::LifecycleChangeState>("LifecycleChangeState", params);
 }
