@@ -1,6 +1,7 @@
 #include <iostream>
 #include <filesystem>
 #include <vector>
+#include <dlfcn.h>
 
 #include <ament_index_cpp/get_package_share_directory.hpp>
 
@@ -62,9 +63,25 @@ void load_plugins(const std::shared_ptr<rclcpp::Node> nh,
     for (auto & dir : plugin_packages_param) {
         std::string plugin_dir = ament_index_cpp::get_package_share_directory(dir).append("/bt_plugins");
         std::vector<std::string> plugin_files = get_plugin_files(plugin_dir);
-        // Register all the plugins
+        // Register each plugin using the appropriate loader based on exported symbol:
+        //   BT_RegisterRosNodeFromPlugin  -> ROS plugin (RegisterRosNode)
+        //   BT_RegisterNodesFromPlugin    -> plain BT plugin (factory.registerFromPlugin)
         for (auto plugin : plugin_files) {
-            RegisterRosNode(factory, plugin, bt_server_params);
+            void* handle = dlopen(plugin.c_str(), RTLD_LAZY | RTLD_LOCAL);
+            if (!handle) {
+                std::cerr << "[load_plugins] dlopen failed for " << plugin << ": " << dlerror() << std::endl;
+                continue;
+            }
+            if (dlsym(handle, "BT_RegisterRosNodeFromPlugin")) {
+                dlclose(handle);
+                RegisterRosNode(factory, plugin, bt_server_params);
+            } else if (dlsym(handle, "BT_RegisterNodesFromPlugin")) {
+                dlclose(handle);
+                factory.registerFromPlugin(plugin);
+            } else {
+                std::cerr << "[load_plugins] No known BT plugin symbol found in " << plugin << std::endl;
+                dlclose(handle);
+            }
         }
     }
 }
