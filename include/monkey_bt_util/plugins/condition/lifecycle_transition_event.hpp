@@ -11,6 +11,7 @@ namespace monkey_bt_util {
 class LifecycleTransitionEvent : public BT::RosTopicSubNode<TransitionEvent> {
  private:
   std::shared_ptr<rclcpp::Node> ros2_node;
+  uint8_t last_logged_transition_id_{255};
 
  public:
   /**

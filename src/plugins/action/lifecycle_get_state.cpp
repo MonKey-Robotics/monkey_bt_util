@@ -20,26 +20,28 @@ bool LifecycleGetState::setRequest(Request::SharedPtr& request) {
   // Request is empty for GetState service
   (void)request;  // Suppress unused parameter warning
 
-  RCLCPP_INFO(node_.lock()->get_logger(),
-              "%s[%s]: Requesting current state",
-              this->name().c_str(),
-              this->service_name_.c_str());
+  RCLCPP_DEBUG(node_.lock()->get_logger(),
+               "%s[%s]: Requesting current state",
+               this->name().c_str(),
+               this->service_name_.c_str());
 
   return true;
 }
 
 BT::NodeStatus LifecycleGetState::onResponseReceived(
     const Response::SharedPtr& response) {
-  // Extract current state from response
-  setOutput("current_state_id", static_cast<int>(response->current_state.id));
+  int state_id = static_cast<int>(response->current_state.id);
+  setOutput("current_state_id", state_id);
   setOutput("current_state_label", response->current_state.label);
-
-  RCLCPP_INFO(node_.lock()->get_logger(),
-              "%s[%s]: Current state is [%d: %s]",
-              this->name().c_str(),
-              this->service_name_.c_str(),
-              response->current_state.id,
-              response->current_state.label.c_str());
+  if (state_id != last_logged_state_id_) {
+    RCLCPP_INFO(node_.lock()->get_logger(),
+                "%s[%s]: State changed to [%d: %s]",
+                this->name().c_str(),
+                this->service_name_.c_str(),
+                state_id,
+                response->current_state.label.c_str());
+    last_logged_state_id_ = state_id;
+  }
 
   return BT::NodeStatus::SUCCESS;
 }

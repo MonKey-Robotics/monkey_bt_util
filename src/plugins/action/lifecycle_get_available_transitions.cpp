@@ -25,10 +25,10 @@ bool LifecycleGetAvailableTransitions::setRequest(Request::SharedPtr& request) {
   // Request is empty for GetAvailableTransitions service
   (void)request;  // Suppress unused parameter warning
 
-  RCLCPP_INFO(node_.lock()->get_logger(),
-              "%s[%s]: Requesting available transitions",
-              this->name().c_str(),
-              this->service_name_.c_str());
+  RCLCPP_DEBUG(node_.lock()->get_logger(),
+               "%s[%s]: Requesting available transitions",
+               this->name().c_str(),
+               this->service_name_.c_str());
 
   return true;
 }
@@ -67,12 +67,12 @@ BT::NodeStatus LifecycleGetAvailableTransitions::onResponseReceived(
   setOutput("start_state_ids", start_ids_stream.str());
   setOutput("goal_state_ids", goal_ids_stream.str());
 
-  RCLCPP_INFO(node_.lock()->get_logger(),
-              "%s[%s]: Found %d available transitions: [%s]",
-              this->name().c_str(),
-              this->service_name_.c_str(),
-              transition_count,
-              trans_labels_stream.str().c_str());
+  RCLCPP_DEBUG(node_.lock()->get_logger(),
+               "%s[%s]: Found %d available transitions: [%s]",
+               this->name().c_str(),
+               this->service_name_.c_str(),
+               transition_count,
+               trans_labels_stream.str().c_str());
 
   return BT::NodeStatus::SUCCESS;
 }

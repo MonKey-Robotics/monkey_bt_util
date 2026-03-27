@@ -9,6 +9,9 @@ using GetState = lifecycle_msgs::srv::GetState;
 namespace monkey_bt_util {
 
 class LifecycleGetState : public BT::RosServiceNode<GetState> {
+ private:
+  int last_logged_state_id_{-1};
+
  public:
   /**
    * @brief Constructor for the LifecycleGetState node

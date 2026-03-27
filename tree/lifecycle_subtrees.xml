@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4">
+  <BehaviorTree ID="to_active">
+    <Sequence>
+      <LifecycleGetState service_name="{get_state_service}"
+                         current_state_id="{current_state_id}"
+                         current_state_label="{current_state_label}"/>
+      <Fallback>
+        <ScriptCondition code="current_state_id == 3"/>
+        <Sequence>
+          <Fallback>
+            <ScriptCondition code="current_state_id == 2"/>
+            <Sequence>
+              <LifecycleChangeState service_name="{change_state_service}"
+                                    transition_id="1"/>
+              <Delay delay_msec="20">
+                <LifecycleChangeState service_name="{change_state_service}"
+                                      transition_id="3"/>
+              </Delay>
+            </Sequence>
+          </Fallback>
+          <LifecycleChangeState service_name="{change_state_service}"
+                                transition_id="3"/>
+        </Sequence>
+      </Fallback>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="to_inactive">
+    <Sequence>
+      <LifecycleGetState service_name="{get_state_service}"
+                         current_state_id="{current_state_id}"
+                         current_state_label="{current_state_label}"/>
+      <Fallback>
+        <ScriptCondition code="current_state_id == 2"/>
+        <Sequence>
+          <ScriptCondition code="current_state_id == 1"/>
+          <LifecycleChangeState service_name="{change_state_service}"
+                                transition_id="1"/>
+        </Sequence>
+        <Sequence>
+          <ScriptCondition code="current_state_id == 3"/>
+          <LifecycleChangeState service_name="{change_state_service}"
+                                transition_id="4"/>
+        </Sequence>
+      </Fallback>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="to_shutdown">
+    <Sequence>
+      <LifecycleGetState service_name="{get_state_service}"
+                         current_state_id="{current_state_id}"
+                         current_state_label="{current_state_label}"/>
+      <Fallback>
+        <ScriptCondition code="current_state_id == 4"/>
+        <Sequence>
+          <ScriptCondition code="current_state_id == 1"/>
+          <LifecycleChangeState service_name="{change_state_service}"
+                                transition_id="5"/>
+        </Sequence>
+        <Sequence>
+          <ScriptCondition code="current_state_id == 2"/>
+          <LifecycleChangeState service_name="{change_state_service}"
+                                transition_id="6"/>
+        </Sequence>
+        <Sequence>
+          <ScriptCondition code="current_state_id == 3"/>
+          <LifecycleChangeState service_name="{change_state_service}"
+                                transition_id="7"/>
+        </Sequence>
+      </Fallback>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="to_unconfigured">
+    <Sequence>
+      <LifecycleGetState service_name="{get_state_service}"
+                         current_state_id="{current_state_id}"
+                         current_state_label="{current_state_label}"/>
+      <Fallback>
+        <ScriptCondition code="current_state_id == 1"/>
+        <Sequence>
+          <Fallback>
+            <ScriptCondition code="current_state_id == 2"/>
+            <Sequence>
+              <LifecycleChangeState service_name="{change_state_service}"
+                                    transition_id="4"/>
+              <Delay delay_msec="20">
+                <LifecycleChangeState service_name="{change_state_service}"
+                                      transition_id="2"/>
+              </Delay>
+            </Sequence>
+          </Fallback>
+          <LifecycleChangeState service_name="{change_state_service}"
+                                transition_id="2"/>
+        </Sequence>
+      </Fallback>
+    </Sequence>
+  </BehaviorTree>
+
+  <!-- Description of Node Models (used by Groot) -->
+  <TreeNodesModel>
+    <Action ID="LifecycleChangeState"
+            editable="true">
+      <input_port name="service_name"/>
+      <input_port name="transition_id"/>
+    </Action>
+    <Action ID="LifecycleGetState"
+            editable="true">
+      <input_port name="service_name"/>
+      <output_port name="current_state_id"/>
+      <output_port name="current_state_label"/>
+    </Action>
+  </TreeNodesModel>
+
+</root>

@@ -40,12 +40,15 @@ BT::NodeStatus LifecycleTransitionEvent::onTick(
   setOutput("goal_state_id", static_cast<int>(last_msg->goal_state.id));
   setOutput("goal_state_label", last_msg->goal_state.label);
 
-  RCLCPP_INFO(ros2_node->get_logger(),
-              "%s: Transition event [%s] from [%s] to [%s]",
-              this->name().c_str(),
-              last_msg->transition.label.c_str(),
-              last_msg->start_state.label.c_str(),
-              last_msg->goal_state.label.c_str());
+  if (last_msg->transition.id != last_logged_transition_id_) {
+    RCLCPP_INFO(ros2_node->get_logger(),
+                "%s: Transition event [%s] from [%s] to [%s]",
+                this->name().c_str(),
+                last_msg->transition.label.c_str(),
+                last_msg->start_state.label.c_str(),
+                last_msg->goal_state.label.c_str());
+    last_logged_transition_id_ = last_msg->transition.id;
+  }
 
   return BT::NodeStatus::SUCCESS;
 }

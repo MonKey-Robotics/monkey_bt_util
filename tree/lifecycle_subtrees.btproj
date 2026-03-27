@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4" project_name="lifecycle_subtrees">
+    <include path="lifecycle_subtrees.xml"/>
+    <!-- Description of Node Models (used by Groot) -->
+    <TreeNodesModel>
+        <Action ID="LifecycleChangeState" editable="true">
+            <input_port name="service_name"/>
+            <input_port name="transition_id"/>
+        </Action>
+        <Action ID="LifecycleGetState" editable="true">
+            <input_port name="service_name"/>
+            <output_port name="current_state_id"/>
+            <output_port name="current_state_label"/>
+        </Action>
+    </TreeNodesModel>
+</root>

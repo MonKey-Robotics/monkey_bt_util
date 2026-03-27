@@ -23,10 +23,10 @@ bool LifecycleGetAvailableStates::setRequest(Request::SharedPtr& request) {
   // Request is empty for GetAvailableStates service
   (void)request;  // Suppress unused parameter warning
 
-  RCLCPP_INFO(node_.lock()->get_logger(),
-              "%s[%s]: Requesting available states",
-              this->name().c_str(),
-              this->service_name_.c_str());
+  RCLCPP_DEBUG(node_.lock()->get_logger(),
+               "%s[%s]: Requesting available states",
+               this->name().c_str(),
+               this->service_name_.c_str());
 
   return true;
 }
@@ -51,12 +51,12 @@ BT::NodeStatus LifecycleGetAvailableStates::onResponseReceived(
   setOutput("state_ids", ids_stream.str());
   setOutput("state_labels", labels_stream.str());
 
-  RCLCPP_INFO(node_.lock()->get_logger(),
-              "%s[%s]: Found %d available states: [%s]",
-              this->name().c_str(),
-              this->service_name_.c_str(),
-              state_count,
-              labels_stream.str().c_str());
+  RCLCPP_DEBUG(node_.lock()->get_logger(),
+               "%s[%s]: Found %d available states: [%s]",
+               this->name().c_str(),
+               this->service_name_.c_str(),
+               state_count,
+               labels_stream.str().c_str());
 
   return BT::NodeStatus::SUCCESS;
 }

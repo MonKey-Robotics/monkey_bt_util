@@ -38,11 +38,11 @@ bool LifecycleChangeState::setRequest(Request::SharedPtr& request) {
   // Assign to request
   request->transition.id = static_cast<uint8_t>(transition_id);
 
-  RCLCPP_INFO(node_.lock()->get_logger(),
-              "%s[%s]: Requesting transition [%d]",
-              this->name().c_str(),
-              this->service_name_.c_str(),
-              request->transition.id);
+  RCLCPP_DEBUG(node_.lock()->get_logger(),
+               "%s[%s]: Requesting transition [%d]",
+               this->name().c_str(),
+               this->service_name_.c_str(),
+               request->transition.id);
 
   return true;
 }
