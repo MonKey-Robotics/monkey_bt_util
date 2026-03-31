@@ -24,28 +24,7 @@
     </Sequence>
   </BehaviorTree>
 
-  <BehaviorTree ID="to_inactive">
-    <Sequence>
-      <LifecycleGetState service_name="{get_state_service}"
-                         current_state_id="{current_state_id}"
-                         current_state_label="{current_state_label}"/>
-      <Fallback>
-        <ScriptCondition code="current_state_id == 2"/>
-        <Sequence>
-          <ScriptCondition code="current_state_id == 1"/>
-          <LifecycleChangeState service_name="{change_state_service}"
-                                transition_id="1"/>
-        </Sequence>
-        <Sequence>
-          <ScriptCondition code="current_state_id == 3"/>
-          <LifecycleChangeState service_name="{change_state_service}"
-                                transition_id="4"/>
-        </Sequence>
-      </Fallback>
-    </Sequence>
-  </BehaviorTree>
-
-  <BehaviorTree ID="to_shutdown">
+  <BehaviorTree ID="to_destroy">
     <Sequence>
       <LifecycleGetState service_name="{get_state_service}"
                          current_state_id="{current_state_id}"
@@ -66,6 +45,31 @@
           <ScriptCondition code="current_state_id == 3"/>
           <LifecycleChangeState service_name="{change_state_service}"
                                 transition_id="7"/>
+        </Sequence>
+      </Fallback>
+      <Delay delay_msec="20">
+        <LifecycleChangeState service_name="{change_state_service}"
+                              transition_id="8"/>
+      </Delay>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="to_inactive">
+    <Sequence>
+      <LifecycleGetState service_name="{get_state_service}"
+                         current_state_id="{current_state_id}"
+                         current_state_label="{current_state_label}"/>
+      <Fallback>
+        <ScriptCondition code="current_state_id == 2"/>
+        <Sequence>
+          <ScriptCondition code="current_state_id == 1"/>
+          <LifecycleChangeState service_name="{change_state_service}"
+                                transition_id="1"/>
+        </Sequence>
+        <Sequence>
+          <ScriptCondition code="current_state_id == 3"/>
+          <LifecycleChangeState service_name="{change_state_service}"
+                                transition_id="4"/>
         </Sequence>
       </Fallback>
     </Sequence>
