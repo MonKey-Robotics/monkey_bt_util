@@ -85,13 +85,17 @@
         <Sequence>
           <Fallback>
             <ScriptCondition code="current_state_id == 2"/>
-            <LifecycleChangeState service_name="{change_state_service}"
-                                  transition_id="4"/>
+            <Sequence>
+              <LifecycleChangeState service_name="{change_state_service}"
+                                    transition_id="4"/>
+              <Delay delay_msec="20">
+                <LifecycleChangeState service_name="{change_state_service}"
+                                      transition_id="2"/>
+              </Delay>
+            </Sequence>
           </Fallback>
-          <Delay delay_msec="20">
-            <LifecycleChangeState service_name="{change_state_service}"
-                                  transition_id="2"/>
-          </Delay>
+          <LifecycleChangeState service_name="{change_state_service}"
+                                transition_id="2"/>
         </Sequence>
       </Fallback>
     </Sequence>
