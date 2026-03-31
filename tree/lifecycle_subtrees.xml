@@ -8,51 +8,19 @@
       <Fallback>
         <ScriptCondition code="current_state_id == 3"/>
         <Sequence>
-          <Fallback>
-            <ScriptCondition code="current_state_id == 2"/>
-            <Sequence>
-              <LifecycleChangeState service_name="{change_state_service}"
-                                    transition_id="1"/>
-              <Delay delay_msec="20">
-                <LifecycleChangeState service_name="{change_state_service}"
-                                      transition_id="3"/>
-              </Delay>
-            </Sequence>
-          </Fallback>
+          <ScriptCondition code="current_state_id == 2"/>
           <LifecycleChangeState service_name="{change_state_service}"
                                 transition_id="3"/>
         </Sequence>
-      </Fallback>
-    </Sequence>
-  </BehaviorTree>
-
-  <BehaviorTree ID="to_destroy">
-    <Sequence>
-      <LifecycleGetState service_name="{get_state_service}"
-                         current_state_id="{current_state_id}"
-                         current_state_label="{current_state_label}"/>
-      <Fallback>
-        <ScriptCondition code="current_state_id == 4"/>
         <Sequence>
-          <ScriptCondition code="current_state_id == 1"/>
           <LifecycleChangeState service_name="{change_state_service}"
-                                transition_id="5"/>
-        </Sequence>
-        <Sequence>
-          <ScriptCondition code="current_state_id == 2"/>
-          <LifecycleChangeState service_name="{change_state_service}"
-                                transition_id="6"/>
-        </Sequence>
-        <Sequence>
-          <ScriptCondition code="current_state_id == 3"/>
-          <LifecycleChangeState service_name="{change_state_service}"
-                                transition_id="7"/>
+                                transition_id="1"/>
+          <Delay delay_msec="20">
+            <LifecycleChangeState service_name="{change_state_service}"
+                                  transition_id="3"/>
+          </Delay>
         </Sequence>
       </Fallback>
-      <Delay delay_msec="20">
-        <LifecycleChangeState service_name="{change_state_service}"
-                              transition_id="8"/>
-      </Delay>
     </Sequence>
   </BehaviorTree>
 
@@ -77,6 +45,32 @@
     </Sequence>
   </BehaviorTree>
 
+  <BehaviorTree ID="to_shutdown">
+    <Sequence>
+      <LifecycleGetState service_name="{get_state_service}"
+                         current_state_id="{current_state_id}"
+                         current_state_label="{current_state_label}"/>
+      <Fallback>
+        <ScriptCondition code="current_state_id == 4"/>
+        <Sequence>
+          <ScriptCondition code="current_state_id == 1"/>
+          <LifecycleChangeState service_name="{change_state_service}"
+                                transition_id="5"/>
+        </Sequence>
+        <Sequence>
+          <ScriptCondition code="current_state_id == 2"/>
+          <LifecycleChangeState service_name="{change_state_service}"
+                                transition_id="6"/>
+        </Sequence>
+        <Sequence>
+          <ScriptCondition code="current_state_id == 3"/>
+          <LifecycleChangeState service_name="{change_state_service}"
+                                transition_id="7"/>
+        </Sequence>
+      </Fallback>
+    </Sequence>
+  </BehaviorTree>
+
   <BehaviorTree ID="to_unconfigured">
     <Sequence>
       <LifecycleGetState service_name="{get_state_service}"
@@ -87,17 +81,13 @@
         <Sequence>
           <Fallback>
             <ScriptCondition code="current_state_id == 2"/>
-            <Sequence>
-              <LifecycleChangeState service_name="{change_state_service}"
-                                    transition_id="4"/>
-              <Delay delay_msec="20">
-                <LifecycleChangeState service_name="{change_state_service}"
-                                      transition_id="2"/>
-              </Delay>
-            </Sequence>
+            <LifecycleChangeState service_name="{change_state_service}"
+                                  transition_id="4"/>
           </Fallback>
-          <LifecycleChangeState service_name="{change_state_service}"
-                                transition_id="2"/>
+          <Delay delay_msec="20">
+            <LifecycleChangeState service_name="{change_state_service}"
+                                  transition_id="2"/>
+          </Delay>
         </Sequence>
       </Fallback>
     </Sequence>
