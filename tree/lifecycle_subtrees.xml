@@ -8,17 +8,19 @@
       <Fallback>
         <ScriptCondition code="current_state_id == 3"/>
         <Sequence>
-          <ScriptCondition code="current_state_id == 2"/>
+          <Fallback>
+            <ScriptCondition code="current_state_id == 2"/>
+            <Sequence>
+              <LifecycleChangeState service_name="{change_state_service}"
+                                    transition_id="1"/>
+              <Delay delay_msec="20">
+                <LifecycleChangeState service_name="{change_state_service}"
+                                      transition_id="3"/>
+              </Delay>
+            </Sequence>
+          </Fallback>
           <LifecycleChangeState service_name="{change_state_service}"
                                 transition_id="3"/>
-        </Sequence>
-        <Sequence>
-          <LifecycleChangeState service_name="{change_state_service}"
-                                transition_id="1"/>
-          <Delay delay_msec="20">
-            <LifecycleChangeState service_name="{change_state_service}"
-                                  transition_id="3"/>
-          </Delay>
         </Sequence>
       </Fallback>
     </Sequence>
