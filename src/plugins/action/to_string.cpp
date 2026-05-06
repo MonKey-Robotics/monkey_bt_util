@@ -18,21 +18,20 @@ BT::NodeStatus ToString::tick() {
     return BT::NodeStatus::FAILURE;
   }
 
-  const BT::Any& any_val = *any_locked;
   std::string out;
 
-  if (any_val.isType<std::string>()) {
-    out = any_val.cast<std::string>();
-  } else if (any_val.isType<bool>()) {
-    out = any_val.cast<bool>() ? "true" : "false";
-  } else if (any_val.isNumber()) {
-    out = std::to_string(any_val.cast<double>());
+  if (any_locked->isType<std::string>()) {
+    out = any_locked->cast<std::string>();
+  } else if (any_locked->isType<bool>()) {
+    out = any_locked->cast<bool>() ? "true" : "false";
+  } else if (any_locked->isNumber()) {
+    out = std::to_string(any_locked->cast<double>());
   } else {
     try {
-      out = any_val.cast<std::string>();
+      out = any_locked->cast<std::string>();
     } catch (...) {
       std::cerr << "[ToString] no string conversion for type "
-                << BT::demangle(any_val.type()) << std::endl;
+                << BT::demangle(any_locked->type()) << std::endl;
       return BT::NodeStatus::FAILURE;
     }
   }
